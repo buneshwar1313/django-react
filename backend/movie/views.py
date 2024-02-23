@@ -1,7 +1,7 @@
 from rest_framework import generics, mixins
 from rest_framework.response import Response
 from .models import *
-from .serializers import MovieSerializer
+from .serializers import *
 from datetime import datetime
 import json
 from rest_framework.status import HTTP_400_BAD_REQUEST,HTTP_404_NOT_FOUND,HTTP_200_OK
@@ -108,3 +108,19 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
         
         return Response({"data": response}, status=HTTP_200_OK)
 
+
+
+
+
+class GenerListView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
+    serializer_class = GenreSerializer
+    queryset = Genre.objects.all()
+    lookup_field = 'id'
+   
+
+    def get(self, request, id=None, *args , **kwargs):
+        if id:
+            return self.retrieve(request, id)
+        else:
+            return self.list(request)
