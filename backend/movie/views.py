@@ -71,7 +71,9 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
     queryset = Movie.objects.all()
     
     def get(self, request, *args, **kwargs):
+        geners = self.request.query_params.get("geners",None)
         
+        title = self.request.query_params.get("title",None)
         unique_dates = Movie.objects.values_list('date', flat=True).distinct()
 
         # Initialize a list to hold the final response
@@ -81,6 +83,15 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
         for date in unique_dates:
             # Query movies for the current date
             movies_for_date = Movie.objects.filter(date=date)
+            
+            # Applying addtional filters
+            if geners:
+                movies_for_date = movies_for_date.filter(genre__in=geners.split(','))
+
+            if title:
+                movies_for_date = movies_for_date.filter(title__icontains=title)
+
+
             
             # Create a dictionary to represent the response for the current date
             date_response = {
