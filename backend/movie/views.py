@@ -1,7 +1,7 @@
 from rest_framework import generics, mixins
 from rest_framework.response import Response
 from .models import *
-from .serializers import MovieSerializer
+from .serializers import *
 from datetime import datetime
 import json
 from rest_framework.status import HTTP_400_BAD_REQUEST,HTTP_404_NOT_FOUND,HTTP_200_OK
@@ -71,7 +71,9 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
     queryset = Movie.objects.all()
     
     def get(self, request, *args, **kwargs):
+        geners = self.request.query_params.get("geners",None)
         
+        title = self.request.query_params.get("title",None)
         unique_dates = Movie.objects.values_list('date', flat=True).distinct()
 
         # Initialize a list to hold the final response
@@ -81,6 +83,15 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
         for date in unique_dates:
             # Query movies for the current date
             movies_for_date = Movie.objects.filter(date=date)
+            
+            # Applying addtional filters
+            if geners:
+                movies_for_date = movies_for_date.filter(genre__in=geners.split(','))
+
+            if title:
+                movies_for_date = movies_for_date.filter(title__icontains=title)
+
+
             
             # Create a dictionary to represent the response for the current date
             date_response = {
@@ -97,3 +108,19 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
         
         return Response({"data": response}, status=HTTP_200_OK)
 
+
+
+
+
+class GenerListView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
+    serializer_class = GenreSerializer
+    queryset = Genre.objects.all()
+    lookup_field = 'id'
+   
+
+    def get(self, request, id=None, *args , **kwargs):
+        if id:
+            return self.retrieve(request, id)
+        else:
+            return self.list(request)
