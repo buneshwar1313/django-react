@@ -11,7 +11,7 @@ class BulkUpdateView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Crea
     serializer_class = MovieSerializer
     
     def get(self, request, *args, **kwargs):
-        file_path = '/home/dell/Documents/github/django-react/backend/movie/index.json'  
+        file_path = '/home/ubuntu/Documents/GIthub/django-react/backend/movie/index.json'  
         with open(file_path, 'r') as file:
             data = json.load(file)
 
