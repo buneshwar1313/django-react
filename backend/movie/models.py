@@ -29,6 +29,7 @@ class Movie(models.Model):
     awards = models.TextField()
     poster = models.URLField()
     imdb_rating = models.DecimalField(max_digits=3, decimal_places=2)
+    meta_score = models.CharField(max_length=20,null=True,blank=True)
     imdb_votes = models.CharField(max_length=20)
     imdb_id = models.CharField(max_length=20)
     imdb_votes = models.CharField(max_length=20)
@@ -47,4 +48,4 @@ class Rating(models.Model):
     value = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.source} - {self.value}"
+        return f"{self.source} - {self.movie}"

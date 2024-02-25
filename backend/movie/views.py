@@ -36,6 +36,7 @@ class BulkUpdateView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Crea
                             'country': movie_data['country'],
                             'awards': movie_data['awards'],
                             'poster': movie_data['poster'],
+                            "meta_score":movie_data['meta_score'],
                             'imdb_rating': float(movie_data['imdb_rating']),
                             'imdb_votes': int(movie_data['imdb_votes'].replace(',', '')),
                             'imdb_id': movie_data['imdb_id'],
@@ -84,9 +85,14 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
             # Query movies for the current date
             movies_for_date = Movie.objects.filter(date=date)
             
-            # Applying addtional filters
+            # # Applying addtional filters
+            # if geners:
+            #     movies_for_date = movies_for_date.filter(genre__in=geners.split(','))
+
             if geners:
-                movies_for_date = movies_for_date.filter(genre__in=geners.split(','))
+                genres_list = geners.split(',')
+                for genre in genres_list:
+                    movies_for_date = movies_for_date.filter(genre__in=[genre.strip()])
 
             if title:
                 movies_for_date = movies_for_date.filter(title__icontains=title)
