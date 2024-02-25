@@ -62,7 +62,7 @@ const TABLE_COLUMNS = [
         {value && value !== "N/A" ? (
           <img src={value} alt="Poster" style={{ width: "50px", height: "auto" }} />
         ) : (
-          <img src="/assets/images/avatar/user-1.png" alt="No Poster" style={{ width: "50px", height: "auto" }} />
+          <img src="/assets/images/users/noimage1.jpg" alt="No Poster" style={{ width: "50px", height: "auto" }} />
         )}
       </>
     ),
@@ -144,7 +144,7 @@ const All = () => {
         date,
         id: `${date}-${movieIndex}`,
         title: movie.title,
-        poster: movie?.poster ? movie?.poster : "assets/images/no_image.jpg",
+        poster: movie?.poster ? movie?.poster : "/assets/images/users/user-1.jpg",
         // genres: movie.genre ? movie.genre.map(genre => genre.name).join(", ") : "",
         genres: (
           <div>
@@ -227,8 +227,8 @@ const All = () => {
   return (
     <>
 
-      <Card>
-        <Card >
+      {/* <Card className="backdrop-blur-sm bg-white/30"> */}
+        <Card  >
           <div className="space-y-4 mb-4 rounded-md">
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -302,7 +302,7 @@ const All = () => {
           ></DataListTable>
 
         )}
-      </Card>
+      {/* </Card> */}
     </>
   );
 };
