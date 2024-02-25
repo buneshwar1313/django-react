@@ -47,11 +47,24 @@ const TABLE_COLUMNS = [
     Header: "Date",
     accessor: "date",
   },
+  // {
+  //   Header: "Poster",
+  //   accessor: "poster",
+  //   Cell: ({ cell: { value } }) => (
+  //     <img src={value} alt="Poster" style={{ width: "50px", height: "auto" }} />
+  //   ),
+  // },
   {
     Header: "Poster",
     accessor: "poster",
     Cell: ({ cell: { value } }) => (
-      <img src={value} alt="Poster" style={{ width: "50px", height: "auto" }} />
+      <>
+        {value && value !== "N/A" ? (
+          <img src={value} alt="Poster" style={{ width: "50px", height: "auto" }} />
+        ) : (
+          <img src="/assets/images/avatar/user-1.png" alt="No Poster" style={{ width: "50px", height: "auto" }} />
+        )}
+      </>
     ),
   },
   {
@@ -131,15 +144,15 @@ const All = () => {
         date,
         id: `${date}-${movieIndex}`,
         title: movie.title,
-        poster: movie.poster,
+        poster: movie?.poster ? movie?.poster : "assets/images/no_image.jpg",
         // genres: movie.genre ? movie.genre.map(genre => genre.name).join(", ") : "",
         genres: (
           <div>
             {movie.genre && movie.genre.map((genre, index) => (
               <Badge
-                key={index} // Make sure to provide a unique key for each Badge
+                key={index} 
                 label={genre.name}
-                className="bg-primary-400 text-white mr-2 mb-2" // Add your custom class here
+                className="bg-primary-400 text-white mr-2 mb-2"
               />
             ))}
           </div>
@@ -199,10 +212,7 @@ const All = () => {
 
 
   const handleGroupChange = (selectedOptions) => {
-    // const selectedGenreIds = selectedOptions.map(option => option.value);
-    // const selectedGenreValue = selectedOptions.map(option => option.name);
-    // setselectedname(selectedGenreValue)
-    // setSelectdfilter(selectedGenreIds);
+
     setSelectdfilter(selectedOptions)
 
   };
