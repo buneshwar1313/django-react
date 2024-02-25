@@ -34,18 +34,26 @@ ALLOWED_HOSTS = ['*',]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+
+PROJECT_APP = [
     'movie',
+]
+
+THIRD_PARTY_APP=[
     'rest_framework',
     'corsheaders',
 ]
 
-
+INSTALLED_APPS += THIRD_PARTY_APP + PROJECT_APP
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -144,3 +152,37 @@ CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1','http://*.localhost', 'http://*.fca
 CSRF_USE_SESSIONS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+
+
+"""Jazzmin setup """
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Imdb",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Imdb",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Imdb",
+
+    # Logo to use for your site, must be present in static files, used for brand on top left
+
+
+    # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
+    "welcome_sign": "Welcome to the Imdb",
+    "copyright": "Imdb Systems",
+    "show_ui_builder": True,
+    "navbar_fixed": True,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+}
+
+
+
+JAZZMIN_UI_TWEAKS = {
+
+    "theme": "minty",
+    "navbar": "navbar-dark",
+}
