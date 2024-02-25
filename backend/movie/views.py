@@ -20,7 +20,7 @@ class BulkUpdateView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Crea
 
             for movie_data in entry['movies']:
                 try:
-                    # Create Movie object
+                   
                     movie, created = Movie.objects.get_or_create(
                         title=movie_data['title'],
                         defaults={
@@ -49,11 +49,11 @@ class BulkUpdateView(generics.GenericAPIView, mixins.ListModelMixin, mixins.Crea
                         }
                     )
 
-                    # Create Genre objects and add to movie
+                   
                     genres = [Genre.objects.get_or_create(name=genre_name.lower())[0] for genre_name in movie_data['genre']]
                     movie.genre.add(*genres)
 
-                    # Create Rating objects and add to movie
+                   
                     for rating_data in movie_data['Ratings']:
                         rating, created = Rating.objects.get_or_create(
                             movie=movie,
@@ -84,11 +84,7 @@ class MovieDashboardView(generics.GenericAPIView, mixins.ListModelMixin, mixins.
         for date in unique_dates:
             # Query movies for the current date
             movies_for_date = Movie.objects.filter(date=date)
-            
-            # # Applying addtional filters
-            # if geners:
-            #     movies_for_date = movies_for_date.filter(genre__in=geners.split(','))
-
+          
             if geners:
                 genres_list = geners.split(',')
                 for genre in genres_list:

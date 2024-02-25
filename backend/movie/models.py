@@ -9,7 +9,7 @@ class Genre(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.name = self.name.lower()  # Convert name to lowercase
+        self.name = self.name.lower() 
         super(Genre, self).save(*args, **kwargs)
 
         
@@ -44,7 +44,7 @@ class Movie(models.Model):
 
 class Rating(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    source = models.CharField(max_length=100, null=True, blank=True)  # Adjusted max_length
+    source = models.CharField(max_length=100, null=True, blank=True)  
     value = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
