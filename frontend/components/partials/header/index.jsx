@@ -82,14 +82,14 @@ const Header = ({ className = "custom-class" }) => {
                   )}
                 </button>
               )}
-              {width < breakpoints.xl && <Logo />}
+              {/* {width < breakpoints.xl && <Logo />} */}
               {/* open mobile menu handlaer*/}
               {width < breakpoints.xl && width >= breakpoints.md && (
                 <div
                   className="cursor-pointer text-slate-900 dark:text-white text-2xl"
                   onClick={handleOpenMobileMenu}
                 >
-                  <Icon icon="heroicons-outline:menu-alt-3" />
+                  {/* <Icon icon="heroicons-outline:menu-alt-3" /> */}
                 </div>
               )}
             <h1 className="text-lg">IMDB Rating</h1>  
@@ -120,14 +120,14 @@ const Header = ({ className = "custom-class" }) => {
           
             <SwitchDark />
 
-            {width <= breakpoints.md && (
+            {/* {width <= breakpoints.md && (
               <div
                 className="cursor-pointer text-slate-900 dark:text-white text-2xl"
                 onClick={handleOpenMobileMenu}
               >
                 <Icon icon="heroicons-outline:menu-alt-3" />
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

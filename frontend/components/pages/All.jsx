@@ -232,9 +232,9 @@ const All = () => {
           <div className="space-y-4 mb-4 rounded-md">
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-row items-end gap-4 "
+              className="md:grid md:grid-cols-3 sm:block gap-5"
             >
-              <div className="basis-1/3 md:basis-1/3 ">
+              <div className="sm:w-full">
                 <Textinput
                   name="title"
                   label="Movie title"
@@ -245,7 +245,7 @@ const All = () => {
                   msgTooltip
                 />
               </div>
-              <div className="basis-1/3 md:basis-1/3 ">
+              <div className="sm:w-full">
                 <label className="form-label" htmlFor="mul_1">
                   Genres
                 </label>
@@ -264,19 +264,20 @@ const All = () => {
                   placeholder="Search options..."
                   register={register}
                   onChange={handleGroupChange}
-                  className="ml-2 react-select"
+                  className="react-select"
                   classNamePrefix="select"
                   id="mul_1"
                 />
               </div>
-              <div className="flex gap-4 ">
-                <button className="h-12 px-4 rounded-md bg-primary-400  text-white dark:bg-black-900">
+              <div className="sm:w-full">
+                
+                <button className="h-12 px-4 rounded-md bg-primary-400  text-white dark:bg-black-900" style={{marginTop:"25px", marginRight:"5px", marginLeft:"10px"}} >
                   Search
                 </button>
                 <button
-                  className="h-12 px-4 rounded-md bg-primary-400 text-white dark:bg-black-900"
+                  className="h-12 px-4 rounded-md bg-primary-400 text-white dark:bg-black-900 sm:mt-2"
                   onClick={handleRemoveFilter}
-                  type="button"
+                  type="button" style={{marginTop:"25px", marginRight:"5px", marginLeft:"10px"}}
                 >
                   Remove Filter
                 </button>
